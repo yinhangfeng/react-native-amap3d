@@ -16,5 +16,11 @@ Pod::Spec.new do |s|
   s.source_files = '**/*.{h,m}'
 
   s.dependency 'React'
-  s.dependency 'AMap3DMap', "~> 6.3.0"
+  s.dependency 'AMapNavi-NO-IDFA'
+
+  # 强行设置react-native-amap3d在运行时动态查找符号
+  # https://github.com/qiuxiang/react-native-amap3d/issues/370
+  s.pod_target_xcconfig = {
+    'OTHER_LDFLAGS' => '$(inherited) -undefined dynamic_lookup'
+  }
 end
