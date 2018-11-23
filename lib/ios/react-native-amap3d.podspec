@@ -23,4 +23,5 @@ Pod::Spec.new do |s|
   s.pod_target_xcconfig = {
     'OTHER_LDFLAGS' => '$(inherited) -undefined dynamic_lookup'
   }
+  s.pod_target_xcconfig  = { 'ENABLE_BITCODE' => 'NO' }
 end
