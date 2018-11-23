@@ -21,7 +21,7 @@ Pod::Spec.new do |s|
   # 强行设置react-native-amap3d在运行时动态查找符号
   # https://github.com/qiuxiang/react-native-amap3d/issues/370
   s.pod_target_xcconfig = {
-    'OTHER_LDFLAGS' => '$(inherited) -undefined dynamic_lookup'
+    'OTHER_LDFLAGS' => '$(inherited) -undefined dynamic_lookup',
+    'ENABLE_BITCODE' => 'NO'
   }
-  s.pod_target_xcconfig  = { 'ENABLE_BITCODE' => 'NO' }
 end
