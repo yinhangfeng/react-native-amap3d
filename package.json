@@ -33,7 +33,7 @@
     "metro-react-native-babel-preset": "0.51.1",
     "react": "16.6.3",
     "react-native": "0.58.4",
-    "react-navigation": "^1.5.11"
+    "react-navigation": "^2.18.0"
   },
   "rnpm": {
     "android": {
