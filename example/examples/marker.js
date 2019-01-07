@@ -38,11 +38,11 @@ export default class MarkerExample extends Component {
 
   componentDidMount() {
     this.mounted = true
-    setInterval(() => {
-      if (this.mounted) {
-        this.setState({ time: new Date() })
-      }
-    }, 1000)
+    // setInterval(() => {
+    //   if (this.mounted) {
+    //     this.setState({ time: new Date() })
+    //   }
+    // }, 1000)
   }
 
   componentWillUnmount() {
@@ -85,12 +85,17 @@ export default class MarkerExample extends Component {
           coordinate={this._coordinates[0]}
         />
         <MapView.Marker color="green" coordinate={this._coordinates[1]} >
-          <TouchableOpacity activeOpacity={0.9} onPress={this._onInfoWindowPress}>
-            <View style={styles.customInfoWindow}>
-              <Text>自定义信息窗口</Text>
-              <Text>{this.state.time.toLocaleTimeString()}</Text>
-            </View>
-          </TouchableOpacity>
+          <MapView.Callout>
+            <TouchableOpacity activeOpacity={0.9} onPress={this._onInfoWindowPress}>
+              <View style={styles.customInfoWindow}>
+                <Text>自定义信息窗口</Text>
+                <Text>{this.state.time.toLocaleTimeString()}</Text>
+              </View>
+            </TouchableOpacity>
+          </MapView.Callout>
+          <View style={{ width: 50, height: 50, backgroundColor: 'rgba(200,255,200,0.3)', justifyContent: 'center', alignItems: 'center'}}>
+            <View style={{ backgroundColor: 'red', width: 4, height: 4, borderRadius: 2}}></View>
+          </View>
         </MapView.Marker>
         <MapView.Marker
           image="flag"
@@ -107,6 +112,18 @@ export default class MarkerExample extends Component {
            )}
           coordinate={this._coordinates[3]}
         />
+
+        <MapView.Marker
+          title="自定义 View maps 写法"
+          coordinate={{
+            latitude: 39.606901,
+            longitude: 116.397972,
+          }}
+        >
+          <View style={styles.customMarker}>
+            <Text style={styles.markerText}>{this.state.time.toLocaleTimeString()}</Text>
+          </View>
+        </MapView.Marker>
       </MapView>
     )
   }
