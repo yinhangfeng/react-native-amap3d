@@ -78,7 +78,7 @@
     _renderer.lineDash = dashed;
 }
 
-- (void)setDashＴｙｐｅ:(NSInteger)dashType {
+- (void)setDashType:(NSInteger)dashType {
     _dashType = dashType;
     _renderer.lineDashType = dashType;
 }
