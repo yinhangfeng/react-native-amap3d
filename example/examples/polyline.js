@@ -57,11 +57,13 @@ export default class PolylineExample extends Component {
           width={5}
           color="rgba(255, 0, 0, 0.5)"
           coordinates={this._line1}
+          dashType={2}
         />
         <MapView.Polyline
           dashed
           width={5}
           coordinates={this._line2}
+          dashType={1}
         />
         <MapView.Polyline
           gradient
