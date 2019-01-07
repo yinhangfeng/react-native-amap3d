@@ -80,7 +80,7 @@
 
 - (void)setDashＴｙｐｅ:(NSInteger)dashType {
     _dashType = dashType;
-    _renderer.lineDashType = dashType
+    _renderer.lineDashType = dashType;
 }
 
 - (void)setGradient:(BOOL)gradient {
