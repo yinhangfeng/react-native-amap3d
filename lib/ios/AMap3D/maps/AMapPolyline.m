@@ -12,6 +12,7 @@
     NSArray *_colors;
     BOOL _dashed;
     BOOL _gradient;
+    NSInteger _dashType;
 }
 
 - (instancetype)init {
@@ -77,6 +78,11 @@
     _renderer.lineDash = dashed;
 }
 
+- (void)setDashＴｙｐｅ:(NSInteger)dashType {
+    _dashType = dashType;
+    _renderer.lineDashType = dashType
+}
+
 - (void)setGradient:(BOOL)gradient {
     _gradient = gradient;
     _renderer.gradient = gradient;
@@ -100,6 +106,7 @@
         _renderer.strokeColor = _color;
         _renderer.strokeColors = _colors;
         _renderer.lineDash = _dashed;
+        _renderer.lineDashType = _dashType;
         _renderer.gradient = _gradient;
     }
     return _renderer;
