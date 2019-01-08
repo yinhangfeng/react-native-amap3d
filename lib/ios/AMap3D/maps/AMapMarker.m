@@ -1,5 +1,6 @@
 #import <React/UIView+React.h>
 #import "AMapMarker.h"
+#import "AMapCustomAnnotationView.h"
 
 #pragma ide diagnostic ignored "OCUnusedMethodInspection"
 #pragma clang diagnostic ignored "-Woverriding-method-mismatch"
@@ -13,6 +14,7 @@
     MAPinAnnotationColor _pinColor;
     UIImage *_image;
     CGPoint _centerOffset;
+    CGPoint _anchor;
     BOOL _draggable;
     BOOL _active;
     BOOL _canShowCallout;
@@ -24,6 +26,7 @@
     _annotation = [MAPointAnnotation new];
     _enabled = YES;
     _canShowCallout = YES;
+    _anchor = CGPointMake(0.5, 1);
     self = [super init];
     return self;
 }
@@ -56,7 +59,16 @@
 
 - (void)setCenterOffset:(CGPoint)centerOffset {
     _centerOffset = centerOffset;
-    _annotationView.centerOffset = centerOffset;
+    if (![_annotationView isKindOfClass:[AMapCustomAnnotationView class] ]) {
+        _annotationView.centerOffset = centerOffset;
+    }
+}
+
+- (void)setAnchor:(CGPoint)anchor {
+    _anchor = anchor;
+    if ([_annotationView isKindOfClass:[AMapCustomAnnotationView class]]) {
+        ((AMapCustomAnnotationView*) _annotationView).anchor = anchor;
+    }
 }
 
 - (void)setImage:(NSString *)name {
@@ -116,21 +128,23 @@
     if (_annotationView == nil) {
         if (_customView) {
             _customView.hidden = NO;
-            _annotationView = [[MAAnnotationView alloc] initWithAnnotation:_annotation reuseIdentifier:nil];
+            _annotationView = [[AMapCustomAnnotationView alloc] initWithAnnotation:_annotation reuseIdentifier:nil];
             _annotationView.bounds = _customView.bounds;
             [_annotationView addSubview:_customView];
             [_annotationView addGestureRecognizer:[
                     [UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_handleTap:)]];
+            
+            ((AMapCustomAnnotationView*) _annotationView).anchor = _anchor;
         } else {
             _annotationView = [[MAPinAnnotationView alloc] initWithAnnotation:_annotation reuseIdentifier:nil];
             ((MAPinAnnotationView *) _annotationView).pinColor = _pinColor;
+            _annotationView.centerOffset = _centerOffset;
         }
 
         _annotationView.enabled = _enabled;
         _annotationView.canShowCallout = _canShowCallout;
         _annotationView.draggable = _draggable;
         _annotationView.customCalloutView = _calloutView;
-        _annotationView.centerOffset = _centerOffset;
 
         if (_zIndex) {
             _annotationView.zIndex = _zIndex;
