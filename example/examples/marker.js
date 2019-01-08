@@ -38,11 +38,11 @@ export default class MarkerExample extends Component {
 
   componentDidMount() {
     this.mounted = true;
-    // setInterval(() => {
-    //   if (this.mounted) {
-    //     this.setState({ time: new Date() })
-    //   }
-    // }, 1000)
+    setInterval(() => {
+      if (this.mounted) {
+        this.setState({ time: new Date() })
+      }
+    }, 1000)
   }
 
   componentWillUnmount() {
@@ -163,6 +163,7 @@ export default class MarkerExample extends Component {
             latitude: 39.606901,
             longitude: 116.397972,
           }}
+          infoWindowDisabled
         >
           <View style={styles.customMarker}>
             <Text style={styles.markerText}>{this.state.time.toLocaleTimeString()}</Text>
