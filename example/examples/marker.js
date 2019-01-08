@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
-import { Alert, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { MapView } from 'react-native-amap3d'
+import React, { Component } from 'react';
+import { Alert, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { MapView } from 'react-native-amap3d';
 
 const styles = StyleSheet.create({
   customIcon: {
@@ -25,19 +25,19 @@ const styles = StyleSheet.create({
   markerText: {
     color: '#fff',
   },
-})
+});
 
 export default class MarkerExample extends Component {
   static navigationOptions = {
     title: '添加标记',
-  }
+  };
 
   state = {
     time: new Date(),
-  }
+  };
 
   componentDidMount() {
-    this.mounted = true
+    this.mounted = true;
     // setInterval(() => {
     //   if (this.mounted) {
     //     this.setState({ time: new Date() })
@@ -46,7 +46,7 @@ export default class MarkerExample extends Component {
   }
 
   componentWillUnmount() {
-    this.mounted = false
+    this.mounted = false;
   }
 
   _coordinates = [
@@ -66,16 +66,17 @@ export default class MarkerExample extends Component {
       latitude: 39.706901,
       longitude: 116.397972,
     },
-  ]
+  ];
 
-  _onMarkerPress = () => Alert.alert('onPress')
-  _onInfoWindowPress = () => Alert.alert('onInfoWindowPress')
-  _onDragEvent = ({ nativeEvent }) => Alert.alert(`${nativeEvent.latitude}, ${nativeEvent.longitude}`)
+  _onMarkerPress = () => Alert.alert('onPress');
+  _onInfoWindowPress = () => Alert.alert('onInfoWindowPress');
+  _onDragEvent = ({ nativeEvent }) =>
+    Alert.alert(`${nativeEvent.latitude}, ${nativeEvent.longitude}`);
 
   render() {
     return (
       <MapView style={StyleSheet.absoluteFill}>
-        <MapView.Marker
+        {/* <MapView.Marker
           active
           draggable
           title="一个可拖拽的标记"
@@ -83,8 +84,8 @@ export default class MarkerExample extends Component {
           onDragEnd={this._onDragEvent}
           onInfoWindowPress={this._onInfoWindowPress}
           coordinate={this._coordinates[0]}
-        />
-        <MapView.Marker color="green" coordinate={this._coordinates[1]} >
+        /> */}
+        <MapView.Marker color="green" coordinate={this._coordinates[1]} active>
           <MapView.Callout>
             <TouchableOpacity activeOpacity={0.9} onPress={this._onInfoWindowPress}>
               <View style={styles.customInfoWindow}>
@@ -93,11 +94,48 @@ export default class MarkerExample extends Component {
               </View>
             </TouchableOpacity>
           </MapView.Callout>
-          <View style={{ width: 50, height: 50, backgroundColor: 'rgba(200,255,200,0.3)', justifyContent: 'center', alignItems: 'center'}}>
-            <View style={{ backgroundColor: 'red', width: 4, height: 4, borderRadius: 2}}></View>
+          <View
+            style={{
+              width: 50,
+              height: 50,
+              backgroundColor: 'rgba(200,255,200,0.4)',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <View style={{ backgroundColor: 'red', width: 4, height: 4, borderRadius: 2 }} />
           </View>
         </MapView.Marker>
+
         <MapView.Marker
+          color="green"
+          coordinate={{
+            latitude: 39.706901,
+            longitude: 116.297972,
+          }}
+          active
+        >
+          <MapView.Callout>
+            <TouchableOpacity activeOpacity={0.9} onPress={this._onInfoWindowPress}>
+              <View style={styles.customInfoWindow}>
+                <Text>自定义信息窗口1</Text>
+                <Text>{this.state.time.toLocaleTimeString()}</Text>
+              </View>
+            </TouchableOpacity>
+          </MapView.Callout>
+          <View
+            style={{
+              width: 50,
+              height: 50,
+              backgroundColor: 'rgba(200,255,200,0.4)',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <View style={{ backgroundColor: 'red', width: 4, height: 4, borderRadius: 2 }} />
+          </View>
+        </MapView.Marker>
+        {/* <MapView.Marker
           image="flag"
           title="自定义图片"
           onPress={this._onMarkerPress}
@@ -123,8 +161,8 @@ export default class MarkerExample extends Component {
           <View style={styles.customMarker}>
             <Text style={styles.markerText}>{this.state.time.toLocaleTimeString()}</Text>
           </View>
-        </MapView.Marker>
+        </MapView.Marker> */}
       </MapView>
-    )
+    );
   }
 }
