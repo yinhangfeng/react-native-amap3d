@@ -26,9 +26,37 @@ export default class MapTypesExample extends Component {
     }
   }
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      region: {
+        latitude: 30,
+        longitude: 120,
+        latitudeDelta: 1,
+        longitudeDelta: 1,
+      },
+      coordinate: {
+        latitude: 30,
+        longitude: 120,
+      },
+    };
+  }
+  
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({
+        region: null,
+        coordinate: undefined,
+      });
+    }, 2000);
+  }
+
   render() {
     return (
       <MapView
+        region={this.state.region}
+        coordinate={this.state.coordinate}
         mapType={this.props.navigation.state.params.mapType}
         style={StyleSheet.absoluteFill}
       />

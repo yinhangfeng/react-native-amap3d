@@ -55,7 +55,9 @@
 }
 
 - (void)setCoordinate:(CLLocationCoordinate2D)coordinate {
-    self.mapView.centerCoordinate = coordinate;
+    if (coordinate.latitude != 0 || coordinate.longitude != 0) {
+        self.mapView.centerCoordinate = coordinate;
+    }
 }
 
 - (void)setTilt:(CGFloat)degree {
@@ -79,6 +81,9 @@
 
 // 如果在地图未加载的时候调用改方法，需要先将 region 存起来，等地图加载完成再设置
 - (void)setRegion:(MACoordinateRegion)region {
+    if (region.span.latitudeDelta == 0 && region.span.longitudeDelta == 0) {
+        return;
+    }
     if (self.loaded) {
         self.mapView.region = region;
     } else {
@@ -283,8 +288,7 @@
     self.loaded = YES;
     
     // struct 里的值会被初始化为 0，这里以此作为条件，判断 initialRegion 是否被设置过
-    // 但实际上经度为 0 是一个合法的坐标，只是考虑到高德地图只在中国使用，就这样吧
-    if (self.initialRegion.center.latitude != 0) {
+    if (self.initialRegion.span.latitudeDelta != 0 || self.initialRegion.span.latitudeDelta != 0) {
         mapView.region = self.initialRegion;
     }
 }
