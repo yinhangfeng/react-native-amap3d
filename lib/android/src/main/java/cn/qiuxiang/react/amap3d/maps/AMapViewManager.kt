@@ -160,15 +160,19 @@ internal class AMapViewManager : ViewGroupManager<AMapView>() {
     }
 
     @ReactProp(name = "coordinate")
-    fun moveToCoordinate(view: AMapView, coordinate: ReadableMap) {
-        view.map.moveCamera(CameraUpdateFactory.changeLatLng(LatLng(
-                coordinate.getDouble("latitude"),
-                coordinate.getDouble("longitude"))))
+    fun moveToCoordinate(view: AMapView, coordinate: ReadableMap?) {
+        if (coordinate != null) {
+            view.map.moveCamera(CameraUpdateFactory.changeLatLng(LatLng(
+                    coordinate.getDouble("latitude"),
+                    coordinate.getDouble("longitude"))))
+        }
     }
 
     @ReactProp(name = "region")
-    fun setRegion(view: AMapView, region: ReadableMap) {
-        view.setRegion(region)
+    fun setRegion(view: AMapView, region: ReadableMap?) {
+        if (region != null) {
+            view.setRegion(region)
+        }
     }
 
     @ReactProp(name = "limitRegion")
