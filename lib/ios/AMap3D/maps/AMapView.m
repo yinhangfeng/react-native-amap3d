@@ -9,11 +9,11 @@
 @implementation AMapView {
     NSMutableDictionary *_markers;
     MAUserLocationRepresentation *_locationStyle;
-    BOOL _isBoundsInit;
+    // BOOL _isBoundsInit;
 }
 
 - (instancetype)init {
-    _isBoundsInit = NO;
+    // _isBoundsInit = NO;
     _markers = [NSMutableDictionary new];
     self = [super init];
     
@@ -27,16 +27,16 @@
     return self;
 }
 
-- (void)setFrame:(CGRect)frame {
-    if (!_isBoundsInit) {
-        [super setFrame:frame];
-    }
-}
+// - (void)setFrame:(CGRect)frame {
+//     if (!_isBoundsInit) {
+//         [super setFrame:frame];
+//     }
+// }
 
-- (void)setBounds:(CGRect)bounds {
-    _isBoundsInit = YES;
-    [super setBounds:bounds];
-}
+// - (void)setBounds:(CGRect)bounds {
+//     _isBoundsInit = YES;
+//     [super setBounds:bounds];
+// }
 
 - (void)setShowsTraffic:(BOOL)shows {
     self.mapView.showTraffic = shows;
