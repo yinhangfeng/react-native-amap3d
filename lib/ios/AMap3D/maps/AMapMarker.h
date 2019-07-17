@@ -4,10 +4,10 @@
 @interface AMapMarker : UIView
 
 @property(nonatomic, copy) RCTBubblingEventBlock onPress;
-@property(nonatomic, copy) RCTBubblingEventBlock onInfoWindowPress;
-@property(nonatomic, copy) RCTBubblingEventBlock onDragStart;
-@property(nonatomic, copy) RCTBubblingEventBlock onDrag;
-@property(nonatomic, copy) RCTBubblingEventBlock onDragEnd;
+@property(nonatomic, copy) RCTDirectEventBlock onInfoWindowPress;
+@property(nonatomic, copy) RCTDirectEventBlock onDragStart;
+@property(nonatomic, copy) RCTDirectEventBlock onDrag;
+@property(nonatomic, copy) RCTDirectEventBlock onDragEnd;
 
 - (MAAnnotationView *)annotationView;
 - (MAPointAnnotation *)annotation;
